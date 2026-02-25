@@ -1,0 +1,48 @@
+{
+  " rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/server.js"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/dashboard/(.*)",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/client/index.html"
+    }
+  ],
+  "builds": [
+    {
+      "src": "client/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "dashboard/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/server.js"
+    },
+    {
+      "src": "/dashboard(/.*)?",
+      "dest": "/dashboard/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/index.html"
+    }
+  ]
+}
