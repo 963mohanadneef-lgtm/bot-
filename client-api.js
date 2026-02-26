@@ -3,7 +3,7 @@
 const API = {
     // تغيير الرابط حسب البيئة
     baseUrl: window.location.hostname === 'localhost' 
-        ? 'http://localhost:3000' 
+        ? 'https://vocal-bavarois-5292d2.netlify.app/' 
         : 'https://superb-belekoy-ebabc2.netlify.app/.netlify/functions/api',
     
     // GET request
