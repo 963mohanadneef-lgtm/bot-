@@ -1,102 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MenuFlow | طلب الطعام</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="client-style.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <span class="logo-icon">🇸🇾</span>
-                <h1>Menu<span>Flow</span></h1>
-            </div>
-            <div class="nav-links" id="navLinks">
-                <a href="#home" class="active">الرئيسية</a>
-                <a href="#menu">المنيو</a>
-                <a href="#offers">العروض</a>
-                <a href="#contact">اتصل بنا</a>
-            </div>
-            <div class="nav-icons">
-                <button class="icon-btn" onclick="toggleCart()">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-badge" id="cartCount">0</span>
-                </button>
-                <button class="icon-btn menu-toggle" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main id="app"></main>
-
-    <!-- Cart Sidebar -->
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>سلة الطلبات</h3>
-            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-items" id="cartItems"></div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>المجموع:</span>
-                <span id="cartTotal">٠ ل.س</span>
-            </div>
-            <button class="checkout-btn" onclick="showCheckout()">إتمام الطلب</button>
-        </div>
-    </div>
-
-    <!-- Checkout Modal -->
-    <div class="checkout-modal" id="checkoutModal">
-        <div class="checkout-content">
-            <div class="checkout-header">
-                <h2><i class="fas fa-map-marker-alt"></i> تفاصيل الطلب</h2>
-                <button class="close-checkout" onclick="hideCheckout()"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="checkout-body">
-                <div class="location-section">
-                    <h3>📍 موقع التوصيل</h3>
-                    <div class="location-input">
-                        <input type="text" id="locationInput" placeholder="أدخل عنوانك">
-                        <button class="get-location-btn" onclick="getCurrentLocation()">
-                            <i class="fas fa-location-dot"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="customer-section">
-                    <h3>👤 معلوماتك</h3>
-                    <input type="text" id="customerName" placeholder="الاسم كامل">
-                    <input type="tel" id="customerPhone" placeholder="رقم الجوال" value="+963">
-                    <textarea id="customerAddress" rows="2" placeholder="العنوان بالتفصيل"></textarea>
-                </div>
-                <div class="payment-section">
-                    <h3>💰 الدفع</h3>
-                    <p class="payment-note">الدفع كاش عند الاستلام</p>
-                </div>
-            </div>
-            <div class="checkout-footer">
-                <button class="cancel-btn" onclick="hideCheckout()">رجوع</button>
-                <button class="confirm-btn" onclick="sendOrder()">
-                    <i class="fab fa-whatsapp"></i> تأكيد الطلب
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Dashboard Link -->
-    <a href="http://localhost:3000" class="dashboard-btn" target="_blank">
-        <i class="fas fa-cog"></i>
-        <span>لوحة التحكم</span>
-    </a>
-
-    <!-- API Script -->
-    <script src="client-api.js"></script>
-</body>
-</html>
