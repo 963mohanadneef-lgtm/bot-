@@ -1,217 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MenuFlow | Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dashboard-style.css">
-</head>
-<body>
-    <div class="dashboard">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>Menu<span>Flow</span></h2>
-                <p>لوحة تحكم المطعم</p>
-            </div>
-            
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item active" onclick="showSection('dashboard')">
-                    <i class="fas fa-home"></i>
-                    <span>الرئيسية</span>
-                </a>
-                <a href="#" class="nav-item" onclick="showSection('items')">
-                    <i class="fas fa-utensils"></i>
-                    <span>الوجبات</span>
-                </a>
-                <a href="#" class="nav-item" onclick="showSection('orders')">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>الطلبات</span>
-                    <span class="badge" id="newOrdersBadge">0</span>
-                </a>
-                <a href="#" class="nav-item" onclick="showSection('add')">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>إضافة وجبة</span>
-                </a>
-                <a href="#" class="nav-item" onclick="showSection('settings')">
-                    <i class="fas fa-cog"></i>
-                    <span>الإعدادات</span>
-                </a>
-                <a href="http://localhost:5500" class="nav-item" target="_blank">
-                    <i class="fas fa-external-link-alt"></i>
-                    <span>عرض الموقع</span>
-                </a>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="content-header">
-                <h1 id="pageTitle">الرئيسية</h1>
-                <div class="header-actions">
-                    <span class="location-badge">
-                        <i class="fas fa-map-marker-alt"></i> سوريا
-                    </span>
-                    <span class="payment-badge">
-                        <i class="fas fa-money-bill"></i> كاش فقط
-                    </span>
-                </div>
-            </header>
-
-            <!-- Dashboard Section -->
-            <section id="dashboardSection" class="content-section">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">🍽️</div>
-                        <div class="stat-details">
-                            <h3>إجمالي الوجبات</h3>
-                            <p class="stat-number" id="totalItems">0</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📦</div>
-                        <div class="stat-details">
-                            <h3>طلبات اليوم</h3>
-                            <p class="stat-number" id="todayOrders">0</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">💰</div>
-                        <div class="stat-details">
-                            <h3>مبيعات اليوم</h3>
-                            <p class="stat-number" id="todaySales">0 ل.س</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🔥</div>
-                        <div class="stat-details">
-                            <h3>العروض النشطة</h3>
-                            <p class="stat-number" id="activeOffers">0</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="recent-orders">
-                    <h2>آخر الطلبات</h2>
-                    <div id="recentOrdersList"></div>
-                </div>
-            </section>
-
-            <!-- Items Section -->
-            <section id="itemsSection" class="content-section" style="display: none;">
-                <div class="section-header">
-                    <h2>قائمة الوجبات</h2>
-                    <button class="btn-primary" onclick="showSection('add')">
-                        <i class="fas fa-plus"></i> إضافة وجبة
-                    </button>
-                </div>
-                
-                <div class="search-bar">
-                    <input type="text" id="searchItems" placeholder="بحث عن وجبة...">
-                    <button onclick="searchItems()"><i class="fas fa-search"></i></button>
-                </div>
-
-                <div class="items-grid" id="itemsGrid"></div>
-            </section>
-
-            <!-- Orders Section -->
-            <section id="ordersSection" class="content-section" style="display: none;">
-                <h2>جميع الطلبات</h2>
-                <div class="orders-list" id="ordersList"></div>
-            </section>
-
-            <!-- Add Item Section -->
-            <section id="addSection" class="content-section" style="display: none;">
-                <h2>إضافة وجبة جديدة</h2>
-                
-                <form id="addItemForm" class="add-form" onsubmit="event.preventDefault(); addItem()">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>اسم الوجبة</label>
-                            <input type="text" id="itemName" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>السعر (ل.س)</label>
-                            <input type="number" id="itemPrice" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>الصنف</label>
-                            <select id="itemCategory" required>
-                                <option value="برغر">🍔 برغر</option>
-                                <option value="بيتزا">🍕 بيتزا</option>
-                                <option value="شاورما">🌯 شاورما</option>
-                                <option value="مشاوي">🔥 مشاوي</option>
-                                <option value="عصائر">🥤 عصائر</option>
-                                <option value="حلويات">🍰 حلويات</option>
-                                <option value="مقبلات">🍟 مقبلات</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>الأيقونة</label>
-                            <select id="itemIcon" required>
-                                <option value="🍔">🍔 برغر</option>
-                                <option value="🍕">🍕 بيتزا</option>
-                                <option value="🌯">🌯 شاورما</option>
-                                <option value="🍗">🍗 دجاج</option>
-                                <option value="🥩">🥩 لحم</option>
-                                <option value="🍟">🍟 بطاطا</option>
-                                <option value="🥤">🥤 عصير</option>
-                                <option value="🍰">🍰 حلويات</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>الوصف</label>
-                        <textarea id="itemDesc" rows="3" required></textarea>
-                    </div>
-                    
-                    <div class="form-group checkbox">
-                        <label>
-                            <input type="checkbox" id="itemOffer">
-                            عرض خاص
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary btn-large">
-                        <i class="fas fa-plus"></i> إضافة للمنيو
-                    </button>
-                </form>
-            </section>
-
-            <!-- Settings Section -->
-            <section id="settingsSection" class="content-section" style="display: none;">
-                <h2>الإعدادات</h2>
-                
-                <div class="settings-card">
-                    <h3>رقم واتساب المطعم</h3>
-                    <div class="setting-item">
-                        <input type="text" id="whatsappNumber" value="963994059020">
-                        <button class="btn-primary" onclick="updateWhatsApp()">حفظ</button>
-                    </div>
-                </div>
-                
-                <div class="settings-card">
-                    <h3>طريقة الدفع</h3>
-                    <p class="payment-setting">💵 دفع كاش عند الاستلام (مفعل)</p>
-                </div>
-                
-                <div class="settings-card">
-                    <h3>البيانات</h3>
-                    <button class="btn-danger" onclick="exportData()">
-                        <i class="fas fa-download"></i> تصدير البيانات
-                    </button>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <script src="dashboard-api.js"></script>
-</body>
-</html>
