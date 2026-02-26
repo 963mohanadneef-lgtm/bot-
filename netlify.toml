@@ -1,9 +1,6 @@
 [build]
   command = "echo 'No build required'"
-  publish = "public"
-
-[build.environment]
-  NODE_VERSION = "18"
+  publish = "."
 
 [[redirects]]
   from = "/api/*"
